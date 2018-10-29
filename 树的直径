@@ -1,0 +1,70 @@
+/*const int maxn = 1e5;
+struct Edge{
+  int v,d;
+};
+vector<Edge> G[maxn];
+int dfs(int u,int t){
+  if(G[u].size() == 0){
+    if(t > deep)deep = t,node = u;
+    return t;
+  }
+  
+  for(int i=0;i<G[u].size();i++){
+    if(!vis[u])
+    dfs(G[u][i].v,t+G[u][i].d);
+  }
+}
+*/
+const int mxn = 1e4;
+struct Edge{
+	int v,d;
+};
+vector<Edge> G[mxn];
+int t = 0,deep = 0,node= 0 ;
+int n,m;
+bool vis[mxn];
+
+void dfs(int u){
+	vis[u] = true;
+	bool tmp = true;
+	
+	for(int i=0;i<G[u].size();i++){
+		int v = G[u][i].v;
+		if(!vis[v]){
+			tmp = true;
+			t += G[u][i].d;
+			dfs(v);
+			t -= G[u][i].d;
+		}
+	}
+	
+	if(tmp && t > deep)
+			deep = t,node = u;
+
+}
+void init(){
+	node = deep = t = 0;
+	memset(vis,false,sizeof(vis));
+}
+
+int main(){
+	int start,end;
+	cin >>n;
+	for(int i=0;i<n-1;i++){
+		int u,v;Edge x;
+		cin >>u>>v>>x.d ;
+		if(!i)start = u;
+		x.v = v;
+		G[u].push_back(x);
+		x.v = u;
+		G[v].push_back(x); 
+	}
+	init();
+	dfs(start);
+	start = node,end = 0;
+	init();
+	dfs(start);
+	end = node;
+	cout << deep<<' '<<start <<' '<<end<<endl;
+	
+}

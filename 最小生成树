@@ -1,0 +1,28 @@
+int kruskal(int n,int m){
+  // n for V,node number ,m for E,edge number;
+  init(n,m);
+  sort(e.begin(),e.end());
+  for(int i=0;i<m;i++){
+    int u = e[i].u,v = e[i].v;
+    if(find(u) == find(v))continue;
+    f[find(u)] = f[v];
+    ans += e[i].d;
+  }
+  
+  retuen ans;
+}
+
+int prime(int n,int m);
+
+void init(int n,int m){
+  for(int i=0;i<m;i++){
+    strcut Edge tmp ;cin >> tmp.u>>tmp.v>>tmp.d;
+    e.push_back(tmp);
+  }
+  for(int i=0;i<maxn;i++)  //who know its order?
+    f[i] = i;
+}
+
+int find(int x){
+  return f[x]==x?x:find(f[x]);
+}

@@ -1,0 +1,6 @@
+const int maxn = 1e5;
+int f[maxn];
+int find(int x)
+{
+  return f[x]==x?x:find(f[x]);
+}

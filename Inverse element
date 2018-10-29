@@ -1,8 +1,5 @@
-#include <cstdio>
-using namespace std;
-
-//ax=1(mod b)
 int exgcd(int a,int b,int &x,int &y){
+  //ax=1(mod b)
   if(!b){a = 1,b = 0;return a;}
   int r = exgcd(b,a%b,x,y);
   int t = x;x = y;y = t - a/b*y;
